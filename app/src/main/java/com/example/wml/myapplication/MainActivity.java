@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -59,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         setTime = start.getText().toString();
+        if(setTime.length()<=2){
+            Random rand = new Random();
+            int randNumber = rand.nextInt(59 - 40 + 1) + 40;
+            setTime = setTime+String.valueOf(randNumber);
+            System.out.println("默认随机setTime"+setTime);
+        }
         //timer.schedule(task1, 0, 20*60*1000);//间隔 20 分钟
         if(task1 !=null){
             task1.cancel();
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             };
         }
         timer.schedule(task1, 0, 60*1000);//间隔 60秒
-        System.out.println("设置完成");
+        System.out.println("设置完成setTime"+setTime);
         Toast.makeText(MainActivity.this, "设置完成", Toast.LENGTH_SHORT).show();
     }
 
